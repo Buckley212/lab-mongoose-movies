@@ -23,6 +23,15 @@ router.get("/celebrities/:celebId", (req, res, next) => {
         next();
     });
 });
+router.post("/celebrities/delete/:celebId", (req, res, next) => {
+    const { celebId } = req.params;
+  
+    Celebrity.findByIdAndRemove(celebId)
+      .then((result) => {
+        console.log("Deleted celeb");
+        res.redirect("/celebrities");
+    })
+});
 
 router.get("/celebrities/new", (req, res) => {
     res.render("celebrities/new.hbs");
